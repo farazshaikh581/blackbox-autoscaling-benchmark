@@ -1,0 +1,30 @@
+cff-version: 1.2.0
+message: "If you use this benchmark, please cite it and the underlying NOMS 2026 paper."
+title: "Black-Box Multi-Objective Autoscaling Benchmark"
+abstract: >-
+  A static-configuration reformulation of the NOMS 2026 Kubernetes autoscaling
+  problem as an expensive, noisy, mixed-integer multi-objective optimization
+  instance, with an offline calibrated oracle and NSGA-II and MOEA/D baselines.
+authors:
+  - family-names: Shaikh
+    given-names: Faraz
+type: software
+license: Apache-2.0
+keywords:
+  - multi-objective optimization
+  - kubernetes autoscaling
+  - reinforcement learning
+  - NSGA-II
+  - MOEA/D
+  - benchmark
+references:
+  - type: conference-paper
+    title: >-
+      Pareto-Optimal Autoscaling: A Multi-Objective Reinforcement Learning
+      Framework for the Performance-Cost-Energy Trilemma
+    authors:
+      - family-names: Shaikh
+        given-names: Faraz
+    conference:
+      name: "IEEE/IFIP NOMS 2026"
+    year: 2026
