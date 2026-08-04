@@ -35,8 +35,12 @@ used by MOEA/D and for same-encoding comparisons).
 - Oracle: the mean objective vector over `K` replications with seeds
   `base_seed ... base_seed + K - 1`. Deterministic for a fixed `base_seed`.
 - `K` is chosen by `experiments/cov_replications.py` (smallest K whose worst
-  objective coefficient of variation drops below a target). The maximum
-  evaluation budget is set by `experiments/timing_benchmark.py`.
+  objective coefficient of variation drops below a target). Resolved: on the
+  real Azure trace under the current calibrated physics, worst-objective CoV
+  is 0.0026 at K=2, well under the 0.05 target, and does not improve further
+  out to K=40. K* = 2. The benchmark runs at K=5 throughout, a margin above
+  this minimum, not a requirement.
+- The maximum evaluation budget is set by `experiments/timing_benchmark.py`.
 
 ## 4. Comparison protocol
 
