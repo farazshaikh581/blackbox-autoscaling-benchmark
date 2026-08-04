@@ -41,11 +41,15 @@ used by MOEA/D and for same-encoding comparisons).
   out to K=40. K* = 2. The benchmark runs at K=5 throughout, a margin above
   this minimum, not a requirement.
 - The maximum evaluation budget is set by `experiments/timing_benchmark.py`.
+  Resolved: the current code runs at about 24 ms per oracle call, roughly 7x
+  faster than an earlier 176 ms reading. At that rate a full 2000-evaluation
+  sweep across all algorithms and seeds costs about 15 minutes on 6 cores,
+  not hours, so the target budget below is affordable.
 
 ## 4. Comparison protocol
 
-- Budget: 500 evaluations at population 20, scaling toward 2000 at population 50,
-  subject to the timing study.
+- Budget: 2000 evaluations at population 50, scaled up from the 500/pop 20
+  floor once the timing study confirmed the target budget is affordable.
 - Algorithms: NSGA-II, MOEA/D, and the RL baseline, all scored on the same oracle
   for a fair objective-space comparison.
 - Metrics: anytime hypervolume against cumulative evaluations, final GD+ and IGD+,
