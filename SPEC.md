@@ -57,6 +57,13 @@ used by MOEA/D and for same-encoding comparisons).
 - Analysis: the relation between the RL scalarization weights and the MOEA/D
   reference directions, and the spatial relation of the RL and evolutionary fronts.
 
+An early NSGA-II/MOEA-D check at both budgets, held-out protocol (train days
+0/1/2, test day 3, base_seed 42, K=5, n=10 seeds): at the 500-eval floor the
+two are statistically tied (HV 1.3131 vs 1.3066, Wilcoxon p=0.160). At the
+2000-eval target they separate, NSGA-II ahead (HV 1.3235 vs 1.3045, p=0.0020).
+The RL baseline is not in this check yet; that three-way comparison lands
+with the full study.
+
 ## 5. Open items
 
 - [ ] Calibrate `topology.py` constants (`service_demand_s`, working set,
