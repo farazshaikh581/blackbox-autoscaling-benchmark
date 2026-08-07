@@ -59,7 +59,8 @@ experiments/
 calibration/
   calibrate.py           hey and cluster hooks to fit constants and check sim vs real
 tests/test_oracle.py
-SPEC.md                  benchmark specification (draft)
+SPEC.md                  ROAR-NET problem-statement specification
+docs/comparison_protocol.md  algorithm comparison protocol and open items
 ```
 
 ## Quickstart
@@ -82,7 +83,9 @@ python -m experiments.timing_benchmark --k 10 --window-hours 6 --runs 10 --algos
 ## Status
 
 The oracle, both algorithms, and the two preparatory analyses run end to end on
-documented placeholder constants (marked `CALIBRATE` in `topology.py`). Open
-tasks are tracked in the issues: fit the constants to a real cluster, add the RL
-baseline on the same oracle, and build the hypervolume, GD+/IGD+, and Wilcoxon
-aggregation. See `SPEC.md`.
+documented placeholder constants (marked `CALIBRATE` in `topology.py`). The
+multi-tier open-chain topology is confirmed on a real k3s cluster (`SPEC.md`).
+Open tasks are tracked in the issues: fit the constants to a real cluster, add
+the RL baseline on the same oracle, and build the hypervolume, GD+/IGD+, and
+Wilcoxon aggregation. See `SPEC.md` for the problem definition and
+`docs/comparison_protocol.md` for the study protocol.
