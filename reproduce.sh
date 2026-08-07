@@ -30,6 +30,13 @@ for s in $SEEDS; do
   echo "== MOEA/D seed $s =="
   $PY -m experiments.run_moead --partitions 12 --evals "$EVALS" --seed "$s" \
       --tiers "$TIERS" --k "$K" --out "$OUT/moead_seed${s}.npz"
+  echo "== MORL seed $s =="
+  $PY -m experiments.run_morl --evals "$EVALS" --seed "$s" \
+      --tiers "$TIERS" --k "$K" --out "$OUT/morl_seed${s}.npz"
 done
+
+echo "== RL weights vs MOEA/D reference directions, front analysis =="
+$PY -m experiments.analyze_fronts --results "$OUT" --partitions 6 --seed 1 \
+    --tiers "$TIERS" --k "$K"
 
 echo "== done: results in $OUT/ =="

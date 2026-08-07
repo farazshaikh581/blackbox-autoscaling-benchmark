@@ -54,6 +54,8 @@ blackbox/                package: physics and oracle
 experiments/
   run_nsga2.py           NSGA-II on the mixed-variable encoding
   run_moead.py           MOEA/D on the real-relaxed encoding
+  run_morl.py            preference-conditioned REINFORCE, real-relaxed encoding
+  analyze_fronts.py      RL weights vs MOEA/D reference directions, front coverage
   cov_replications.py    pick K from the coefficient of variation
   timing_benchmark.py    wall-clock timing to a maximum evaluation budget
 calibration/
@@ -75,6 +77,9 @@ python -m experiments.run_nsga2 --pop 20 --evals 500 --seed 1 --k 5
 # MOEA/D under the same budget
 python -m experiments.run_moead --partitions 12 --evals 500 --seed 1 --k 5
 
+# the RL baseline, swept over the same das-dennis directions MOEA/D decomposes with
+python -m experiments.run_morl --evals 500 --seed 1 --k 5
+
 # preparatory analyses
 python -m experiments.cov_replications --configs 20 --kmax 40 --target 0.05
 python -m experiments.timing_benchmark --k 10 --window-hours 6 --runs 10 --algos 3
@@ -82,10 +87,11 @@ python -m experiments.timing_benchmark --k 10 --window-hours 6 --runs 10 --algos
 
 ## Status
 
-The oracle, both algorithms, and the two preparatory analyses run end to end on
-documented placeholder constants (marked `CALIBRATE` in `topology.py`). The
-multi-tier open-chain topology is confirmed on a real k3s cluster (`SPEC.md`).
-Open tasks are tracked in the issues: fit the constants to a real cluster, add
-the RL baseline on the same oracle, and build the hypervolume, GD+/IGD+, and
-Wilcoxon aggregation. See `SPEC.md` for the problem definition and
-`docs/comparison_protocol.md` for the study protocol.
+The oracle, all three algorithms (NSGA-II, MOEA/D, and the MORL baseline),
+and the two preparatory analyses run end to end on documented placeholder
+constants (marked `CALIBRATE` in `topology.py`). The multi-tier open-chain
+topology is confirmed on a real k3s cluster (`SPEC.md`). Open tasks are
+tracked in the issues: fit the constants to a real cluster, and build the
+hypervolume, GD+/IGD+, and Wilcoxon aggregation. See `SPEC.md` for the
+problem definition and `docs/comparison_protocol.md` for the study
+protocol, including the RL-weights-vs-MOEA/D-directions analysis.
