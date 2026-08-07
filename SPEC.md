@@ -29,9 +29,9 @@ returns latency, cost, and energy as noisy values, not exact ones.
 
 The problem and its energy model come from a multi-objective
 reinforcement learning framework for Pareto-optimal autoscaling,
-published at IEEE/IFIP NOMS 2026. This document formalizes that same
-problem as a reusable black-box benchmark instance, independent of any
-one solving method.
+published at IEEE/IFIP NOMS 2026 (see References). This document
+formalizes that same problem as a reusable black-box benchmark
+instance, independent of any one solving method.
 
 ## Task
 
@@ -236,6 +236,7 @@ Turck, and builds on the applicant's own prior NOMS 2026 paper below.
 Shaikh, F. Pareto-Optimal Autoscaling: A Multi-Objective Reinforcement
 Learning Framework for the Performance-Cost-Energy Trilemma. IEEE/IFIP
 NOMS 2026.
+https://www.researchgate.net/publication/405231482_Pareto-Optimal_Autoscaling_A_Multi-Objective_Reinforcement_Learning_Framework_for_the_Performance-Cost-Energy_Trilemma
 
 Blank, J. and Deb, K. pymoo: Multi-Objective Optimization in Python.
 IEEE Access, 2020.
