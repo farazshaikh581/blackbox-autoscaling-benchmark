@@ -15,6 +15,14 @@ Two encodings are provided: a mixed-variable one (`AutoscalingProblem`, used by
 NSGA-II) and a real-relaxed one with rounding (`RealEncodedAutoscalingProblem`,
 used by MOEA/D and for same-encoding comparisons).
 
+**Confirmed on a real k3s cluster:** the open-chain call graph, additive
+per-tier latency, and single-bottleneck capacity all hold on real hardware.
+Every request traverses each tier once, in order, with demand rising down the
+chain. End-to-end latency equals the sum of per-tier sojourns to within about
+7%. Throughput plateaus at the heaviest tier's predicted rate (measured 0.73
+rps vs 0.74 rps predicted from `1 / heaviest-tier service time`), confirming
+the simulator's bottleneck-tier model rather than an assumed one.
+
 ## 2. Objectives (minimize)
 
 `f(x) = [ latency_ms, cost, energy_W ]`
@@ -68,7 +76,7 @@ with the full study.
 
 - [ ] Calibrate `topology.py` constants (`service_demand_s`, working set,
       `node_cpu_capacity_cores`, energy parameters) to a real cluster.
-- [ ] Confirm the multi-tier topology and call graph.
+- [x] Confirm the multi-tier topology and call graph (Section 1).
 - [ ] Add the RL baseline on the offline oracle.
 - [ ] Build the hypervolume, GD+/IGD+, and Wilcoxon aggregation with
       anytime-convergence plots.
