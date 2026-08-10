@@ -76,6 +76,6 @@ is still open.
 - [x] Confirm the multi-tier topology and call graph (`SPEC.md`,
       Detailed description).
 - [x] Add the RL baseline on the offline oracle (`experiments/run_morl.py`).
-- [ ] Build the hypervolume, GD+/IGD+, and Wilcoxon aggregation with
+- [x] Build the hypervolume, GD+/IGD+, and Wilcoxon aggregation with
       anytime-convergence plots.
 - [ ] Confirm the final fronts on a real cluster.
