@@ -68,6 +68,21 @@ spatial-relation question tracked separately. One seed's worth landed
 as a side effect of building this script; the full multi-seed version
 is still open.
 
+## Metrics aggregation and MORL baseline scoring
+
+`experiments/aggregate.py` reads the per-seed `.npz` runs written by each
+runner and reports anytime hypervolume against cumulative evaluations, final
+hypervolume, GD+, and IGD+ against a shared reference set, and Wilcoxon
+signed-rank tests between algorithms, plus a convergence figure and a
+Pareto-front overlay.
+
+MORL's own score on the offline oracle, 5 seeds at the target budget (2000
+evals, archive 50, K=5): HV 1.2468 +/- 0.0086, IGD+ 0.0111 +/- 0.0035, GD+
+0.0068 +/- 0.0042. Single-algorithm numbers only, since no NSGA-II/MOEA-D runs
+share this directory yet; the Wilcoxon test needs a second algorithm's runs to
+compare against. The full three-way NSGA-II/MOEA-D/MORL comparison is a
+separate, larger 10-seed run, tracked as its own item below.
+
 ## Open items
 
 - [ ] Calibrate `topology.py` constants (`service_demand_s`, working
@@ -78,4 +93,5 @@ is still open.
 - [x] Add the RL baseline on the offline oracle (`experiments/run_morl.py`).
 - [x] Build the hypervolume, GD+/IGD+, and Wilcoxon aggregation with
       anytime-convergence plots.
+- [ ] Run the full 10-seed x {NSGA-II, MOEA/D, MORL} comparison.
 - [ ] Confirm the final fronts on a real cluster.
