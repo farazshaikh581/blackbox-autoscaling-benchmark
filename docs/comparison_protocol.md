@@ -83,6 +83,12 @@ share this directory yet; the Wilcoxon test needs a second algorithm's runs to
 compare against. The full three-way NSGA-II/MOEA-D/MORL comparison is a
 separate, larger 10-seed run, tracked as its own item below.
 
+Anytime hypervolume convergence and the Pareto-front overlay for this run:
+
+![MORL anytime hypervolume convergence, 5 seeds](figures/morl_offline_oracle_convergence.png)
+
+![MORL Pareto-front overlay, 5 seeds](figures/morl_offline_oracle_pareto.png)
+
 ## Open items
 
 - [ ] Calibrate `topology.py` constants (`service_demand_s`, working
