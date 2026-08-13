@@ -89,6 +89,58 @@ Anytime hypervolume convergence and the Pareto-front overlay for this run:
 
 ![MORL Pareto-front overlay, 5 seeds](figures/morl_offline_oracle_pareto.png)
 
+## Full comparison: 10 seeds x {NSGA-II, MOEA/D, MORL}
+
+Same held-out protocol as above (train days 0/1/2, test day 3, base_seed
+42, K=5, n=10 seeds), run at both budgets. MORL reports two numbers:
+"greedy" is the trained policy's actual readout, the deployable score.
+"best-found" is the best point MORL saw anywhere during training, a
+diagnostic upper bound, not something the policy can reliably reproduce
+on its own.
+
+**Floor budget (500 evals, pop 20), `docs/data/comparison_floor.csv`:**
+
+| algo | HV (mean) | IGD+ | GD+ |
+|---|---|---|---|
+| NSGA-II | 1.3131 | 0.0025 | 0.0069 |
+| MOEA/D | 1.3066 | 0.0043 | 0.0001 |
+| MORL best-found | 1.3149 | 0.0058 | 0.1442 |
+| MORL greedy | 1.0479 | 0.1588 | 0.0033 |
+
+Wilcoxon: NSGA-II vs MOEA/D p=0.160, NSGA-II vs MORL-BF p=0.492, MOEA/D
+vs MORL-BF p=0.160 (all tied). MORL greedy trails everything, p=0.0020
+against each.
+
+**Target budget (2000 evals, pop 50), `docs/data/comparison_2000.csv`:**
+this is the proposal's actual stated budget and is the number that
+should anchor any paper or STSM-report claim about the raw held-out
+ranking.
+
+| algo | HV (mean +/- std) | IGD+ | GD+ |
+|---|---|---|---|
+| NSGA-II | 1.3235 +/- 0.0053 | 0.0008 +/- 0.0006 | 0.0056 +/- 0.0105 |
+| MOEA/D | 1.3045 +/- 0.0031 | 0.0037 +/- 0.0009 | 0.0000 +/- 0.0000 |
+| MORL best-found | 1.3250 +/- 0.0025 | 0.0009 +/- 0.0003 | 0.0969 +/- 0.0493 |
+| MORL greedy | 1.2752 +/- 0.0052 | 0.0197 +/- 0.0039 | 0.0004 +/- 0.0003 |
+
+Wilcoxon: NSGA-II vs MOEA/D p=0.0020, NSGA-II vs MORL-BF p=0.6953
+(tied), MOEA/D vs MORL-BF p=0.0020, MORL greedy below NSGA-II and
+MOEA/D at p=0.0020 each.
+
+**More budget does not just sharpen the floor result, it changes it.**
+At the floor, NSGA-II, MOEA/D, and MORL best-found were all
+statistically tied. At the target budget, NSGA-II and MORL best-found
+stay tied with each other, but MOEA/D separates below both,
+significantly. This should be read as "MOEA/D was not distinguishable
+from the other two at 500 evals, and now is," not as a general claim
+that MOEA/D is the weaker algorithm. MORL greedy also improved a lot
+with the larger training budget, from HV 1.0479 to 1.2752, though it
+still trails the top group.
+
+![Full comparison anytime hypervolume convergence, target budget, 10 seeds](figures/full_comparison_2000_convergence.png)
+
+![Full comparison Pareto-front overlay, target budget, 10 seeds](figures/full_comparison_2000_pareto.png)
+
 ## Open items
 
 - [ ] Calibrate `topology.py` constants (`service_demand_s`, working
@@ -99,5 +151,5 @@ Anytime hypervolume convergence and the Pareto-front overlay for this run:
 - [x] Add the RL baseline on the offline oracle (`experiments/run_morl.py`).
 - [x] Build the hypervolume, GD+/IGD+, and Wilcoxon aggregation with
       anytime-convergence plots.
-- [ ] Run the full 10-seed x {NSGA-II, MOEA/D, MORL} comparison.
+- [x] Run the full 10-seed x {NSGA-II, MOEA/D, MORL} comparison.
 - [ ] Confirm the final fronts on a real cluster.
