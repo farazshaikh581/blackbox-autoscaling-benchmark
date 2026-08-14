@@ -141,6 +141,31 @@ still trails the top group.
 
 ![Full comparison Pareto-front overlay, target budget, 10 seeds](figures/full_comparison_2000_pareto.png)
 
+## Energy model validation (offline)
+
+Two checks that need no live cluster, both against the calibrated oracle.
+
+**Power curve.** The node power curve `P(u) = P_idle + (P_max-P_idle)*u^alpha`
+is fit against SPECpower_ssj2008, a published, standardized benchmark that
+reports measured average watts at 11 load levels for a real server. This
+grounds the curve's form and parameters in measured hardware without needing
+a cluster of our own: P_idle=60.7 W, P_max=241.4 W, alpha=1.061, R2=0.9966.
+
+![SPECpower power-curve fit](figures/specpower_fit.png)
+
+**Admissibility and distinctness.** Two more checks against a 6000-eval
+NSGA-II front and a 500-config random pool, at the fitted power curve above.
+(i) Admissibility: energy should rise with the number of running replicas
+under a consolidation-aware model, and fall under a naive single-node model
+that ignores packing. Spearman(sum replicas, energy): M0 (single-node)
+-0.846, M1 (consolidation) +0.697, confirming M1 is the admissible model. (iv)
+Distinctness: on the 50-point front, cost and energy are strongly correlated
+(Spearman +0.986) but not identical, so energy is not a redundant copy of
+cost. 20% of front points are admitted only by the energy axis, and 1 of 5
+latency-ordered slices shows a real cost/energy trade (Spearman < 0.5).
+
+![Energy model validation: admissibility and front distinctness](figures/energy_model_validation.png)
+
 ## Open items
 
 - [ ] Calibrate `topology.py` constants (`service_demand_s`, working
