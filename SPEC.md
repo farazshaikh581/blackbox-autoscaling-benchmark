@@ -98,11 +98,36 @@ reported score for a solution is the mean over `K` independent
 realizations with seeds `base_seed ... base_seed + K - 1`,
 deterministic for a fixed `base_seed`. `K` is chosen by
 `experiments/cov_replications.py`, the smallest `K` whose
-worst-objective coefficient of variation drops below a target
-threshold, rather than fixed arbitrarily. Resolved: on the real Azure
-trace, worst-objective CoV is 0.0026 at K=2, well under the 0.05
+worst-objective coefficient of variation (CoV) drops below a target
+threshold, rather than fixed arbitrarily.
+
+| K | latency_ms CoV | cost CoV | energy_W CoV | worst |
+|---|---|---|---|---|
+| 2 | 0.0003 | 0.0000 | 0.0003 | 0.0003 |
+| 5 | 0.0006 | 0.0000 | 0.0002 | 0.0006 |
+| 10 | 0.0004 | 0.0000 | 0.0001 | 0.0004 |
+| 20 | 0.0004 | 0.0000 | 0.0001 | 0.0004 |
+| 40 | 0.0005 | 0.0000 | 0.0001 | 0.0005 |
+
+![CoV vs K](docs/figures/cov_replications.png)
+
+`cost` has zero CoV because it is a deterministic function of the
+solution, not the workload realization. Resolved: on the real Azure
+trace, worst-objective CoV is 0.0003 at K=2, well under the 0.05
 target. `K* = 2`; the benchmark runs at K=5 throughout, a margin above
 this minimum, not a requirement.
+
+**Is K=5 enough for the pairwise comparisons this benchmark reports?**
+This is a coarse check, not a formal power analysis, since it compares
+two different quantities: raw per-objective CoV under one fixed
+configuration, against the normalized hypervolume this benchmark
+actually tests. Worst-objective CoV at K=5 is about 0.06%. The
+smallest statistically significant pairwise gap found anywhere in
+this project is the dynamic-policy NSGA-II vs. MOEA/D result
+(p=0.0005 at n=20 seeds), about a 2.7% relative gap, roughly 40x
+larger than the replication noise floor. Every other reported
+comparison's effect size is larger still. Replication noise at K=5 is
+unlikely to be driving any pairwise result reported here.
 
 The maximum evaluation budget is set by `experiments/timing_benchmark.py`.
 Resolved: the current code runs at about 24 ms per oracle call, so a
