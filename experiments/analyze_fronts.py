@@ -28,7 +28,7 @@ Reads the saved final fronts in results/ for the coverage matrix, and re-trains
 MORL in-process for one representative seed to obtain its greedy preference sweep
 (not stored in the saved runs). Writes results/fig_weights.png.
 
-    python -m experiments.analyze_fronts --results results --partitions 6 --seed 1
+    python -m experiments.analyze_fronts --results results --partitions 12 --seed 1
 """
 from __future__ import annotations
 
@@ -47,8 +47,10 @@ from blackbox import default_topology  # noqa: E402
 from experiments.run_morl import run_morl, greedy_sweep  # noqa: E402
 
 OBJ = ["latency_ms", "cost", "energy_W"]
-COLOR = {"nsga2": "#0072B2", "moead": "#E69F00", "morl": "#009E73"}
-LABEL = {"nsga2": "NSGA-II", "moead": "MOEA/D", "morl": "MORL"}
+COLOR = {"nsga2": "#0072B2", "moead": "#E69F00", "morl": "#009E73",
+         "morl_bf": "#CC79A7"}
+LABEL = {"nsga2": "NSGA-II", "moead": "MOEA/D", "morl": "MORL",
+         "morl_bf": "MORL-BF"}
 
 
 # --- 2. Set coverage (C-metric) -------------------------------------------------
@@ -156,8 +158,11 @@ def plot_alignment(W, F_morl, region, path):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--results", default="results")
-    ap.add_argument("--partitions", type=int, default=6,
-                    help="das-dennis partitions for the shared direction set")
+    ap.add_argument("--partitions", type=int, default=12,
+                    help="das-dennis partitions for the shared direction set, "
+                         "must match run_moead.py's --partitions (default 12) "
+                         "for the 'same directions MOEA/D decomposes with' "
+                         "claim below to actually hold")
     ap.add_argument("--evals", type=int, default=500)
     ap.add_argument("--seed", type=int, default=1)
     ap.add_argument("--tiers", type=int, default=3)
@@ -167,7 +172,7 @@ def main():
 
     # --- Coverage over all saved seeds. --------------------------------------
     runs = load_fronts(args.results)
-    algos = [a for a in ["nsga2", "moead", "morl"] if a in runs]
+    algos = [a for a in ["nsga2", "moead", "morl", "morl_bf"] if a in runs]
     print("=" * 72)
     print("Spatial relation of the fronts")
     print("=" * 72)
