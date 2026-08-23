@@ -47,15 +47,6 @@ per-tier sojourn times. The tiers are not interchangeable: each has its
 own fixed compute demand per request. The default chain has three
 tiers (frontend, logic, backend), with demand rising down the chain.
 
-Confirmed on a real k3s cluster: the open-chain call graph, additive
-per-tier latency, and single-bottleneck capacity all hold on real
-hardware. Every request traverses each tier once, in order, with
-demand rising down the chain. End-to-end latency equals the sum of
-per-tier sojourns to within about 7%. Throughput plateaus at the
-heaviest tier's predicted rate (measured 0.73 rps vs 0.74 rps predicted
-from `1 / heaviest-tier service time`), confirming the simulator's
-bottleneck-tier model rather than an assumed one.
-
 **Decision variables.** For a chain of `T` tiers, a solution sets three
 values per tier:
 
@@ -83,9 +74,13 @@ cross-tier or joint constraints.
   solution, no randomness.
 - `energy_W`: mean deployment power. Node power follows
   `P = P_idle + (P_max - P_idle) u^alpha`, attributed to pods by CPU
-  share with an even split of the idle floor. Currently placeholder
-  hardware constants (`P_idle=50, P_max=250, alpha=2.0`), pending a
-  real-cluster calibration pass (open item, tracked separately).
+  share with an even split of the idle floor. Constants
+  (`P_idle=50, P_max=250, alpha=2.0`) are the same values used in the
+  referenced NOMS 2026 work. An offline check against the published
+  SPECpower_ssj2008 benchmark confirms this form and magnitude are
+  plausible on real hardware (`P_idle=60.7 W, P_max=241.4 W,
+  alpha=1.061`, R2=0.997, `docs/comparison_protocol.md`). Refitting
+  these constants to a live cluster is out of this STSM's scope.
 
 **Evaluation and noise.** A solution is scored by a fast analytic
 oracle, not by a live deployment, since deploying every candidate a
