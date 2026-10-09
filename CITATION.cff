@@ -1,0 +1,21 @@
+cff-version: 1.2.0
+message: "If you use this benchmark, please cite it."
+title: "Black-Box Multi-Objective Autoscaling Benchmark: paper artifact"
+abstract: >-
+  A black-box multi-objective benchmark for Kubernetes autoscaling over latency,
+  cost and energy, with static, edge-cloud and dynamic variants, a calibrated
+  oracle, a held-out evaluation protocol, five method baselines and testbed
+  validation scripts and data.
+authors:
+  - family-names: Shaikh
+    given-names: Faraz
+type: software
+license: Apache-2.0
+repository-code: "https://github.com/farazshaikh581/blackbox-autoscaling-benchmark/tree/paper-artifact-v1"
+keywords:
+  - multi-objective optimization
+  - kubernetes autoscaling
+  - black-box benchmarking
+  - evolutionary algorithms
+  - reinforcement learning
+  - energy efficiency

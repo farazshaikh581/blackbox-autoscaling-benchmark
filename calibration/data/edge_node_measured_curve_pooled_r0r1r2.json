@@ -1,0 +1,25 @@
+{
+  "hardware": "imec bare-metal r0+r1+r2 pooled, 6-core, RAPL package",
+  "method": "pooled full 6-core sweep across 3 nodes, u = k/6, 3 passes x 6.0s/level each, n=63 points",
+  "form": "P_total_W = P_idle + (P_max-P_idle)*u**alpha",
+  "measured_constants": {
+    "P_IDLE": 2.8,
+    "P_MAX": 81.3,
+    "ALPHA": 0.7
+  },
+  "free_fit": {
+    "P_idle": 2.75,
+    "P_max": 81.34,
+    "alpha": 0.746,
+    "P_idle_stderr": 1.199,
+    "P_max_stderr": 0.937,
+    "alpha_stderr": 0.031,
+    "R2": 0.9807
+  },
+  "spec_5_4_existing": {
+    "P_idle": 31.6,
+    "P_max": 85.6,
+    "alpha": 1.5
+  },
+  "n_samples": 63
+}

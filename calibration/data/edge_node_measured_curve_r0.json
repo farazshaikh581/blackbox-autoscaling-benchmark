@@ -1,0 +1,21 @@
+{
+  "hardware": "imec bare-metal r0, 6-core, RAPL package",
+  "method": "full 6-core sweep, u = k/6, real RAPL package energy_uj over 3 passes x 6.0s/level",
+  "form": "P_total_W = P_idle + (P_max-P_idle)*u**alpha",
+  "measured_constants": {
+    "P_IDLE": 3.8,
+    "P_MAX": 74.0,
+    "ALPHA": 0.8
+  },
+  "free_fit": {
+    "P_idle": 3.82,
+    "P_max": 74.0,
+    "alpha": 0.758,
+    "P_idle_stderr": 0.69,
+    "P_max_stderr": 0.541,
+    "alpha_stderr": 0.02,
+    "R2": 0.9976
+  },
+  "raw_k0_median_W": 3.38,
+  "n_samples": 21
+}

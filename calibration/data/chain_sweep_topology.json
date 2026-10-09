@@ -1,0 +1,15 @@
+{
+  "per_tier_compute_ms": {
+    "frontend": 409.39705606017793,
+    "logic": 760.5842095799744,
+    "backend": 1350.3290677243579
+  },
+  "chain": [
+    "frontend",
+    "logic",
+    "backend"
+  ],
+  "e2e_total_ms": 2364.1343155011004,
+  "sum_compute_ms": 2520.3103333645104,
+  "network_ms": -156.17601786340992
+}

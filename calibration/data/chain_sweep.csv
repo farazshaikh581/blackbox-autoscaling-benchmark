@@ -1,0 +1,5 @@
+exp,concurrency,completed,errors,throughput_rps,lat_p50,lat_p90,lat_p99,cpu_frontend_m,cpu_logic_m,cpu_backend_m
+K_knee,1,5,0,0.33,3203.0,3386.9,3386.9,53,163,259
+K_knee,2,6,0,0.4,6706.9,7605.9,7605.9,163,102,259
+K_knee,4,8,0,0.53,10906.0,14131.4,14131.4,268,159,193
+K_knee,8,11,0,0.73,14368.4,23054.5,24568.8,399,265,196

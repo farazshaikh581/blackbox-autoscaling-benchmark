@@ -1,0 +1,9 @@
+Black-Box Multi-Objective Autoscaling Benchmark
+Copyright 2026 Faraz Shaikh
+
+The energy model (blackbox/energy_model.py) and the objective and workload
+definitions are derived from the NOMS 2026 reference implementation
+"Pareto-Optimal Autoscaling"
+(https://github.com/farazshaikh581/pareto-optimal_autoscaling), Apache-2.0.
+
+This product includes software licensed under the Apache License, Version 2.0.

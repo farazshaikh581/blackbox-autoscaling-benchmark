@@ -1,0 +1,26 @@
+{
+  "hardware": "imec bare-metal r1, 6-core, RAPL package",
+  "method": "emulated 6-core edge class: busy workers pinned to 6 of 6 physical cores, u = k/6, real RAPL package energy_uj over 3 passes x 6.0s/level",
+  "form": "P_total_W = P_idle + (P_max-P_idle)*u**alpha  (u relative to the emulated class's own capacity)",
+  "measured_constants": {
+    "P_IDLE": 2.2,
+    "P_MAX": 84.8,
+    "ALPHA": 0.7
+  },
+  "free_fit": {
+    "P_idle": 2.22,
+    "P_max": 84.83,
+    "alpha": 0.741,
+    "P_idle_stderr": 0.832,
+    "P_max_stderr": 0.649,
+    "alpha_stderr": 0.02,
+    "R2": 0.9974
+  },
+  "raw_k0_median_W": 2.15,
+  "prior_guessed_defaults": {
+    "P_idle": 20.0,
+    "P_max": 60.0,
+    "alpha": 1.4
+  },
+  "n_samples": 21
+}
